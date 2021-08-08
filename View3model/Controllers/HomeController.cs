@@ -34,10 +34,40 @@ namespace View3model.Controllers
             return View(veggy);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Create(VeganVM vegan)
         {
+            Fruit fru = new Fruit();
+            fru.FruitName = vegan.FruitName;
+            _context.Fruits.Add(fru);
+            _context.SaveChanges();
+
+            Vegetable veg = new Vegetable();
+            veg.VegetableName = vegan.VegetableName;
+            _context.Vegetables.Add(veg);
+            _context.SaveChanges();
+
+            Legume legu = new Legume();
+            legu.LegumeName = vegan.LegumeName;
+            _context.Legumes.Add(legu);
+            _context.SaveChanges();
+
+
+            Grain gra = new Grain();
+            gra.GrainName = vegan.GrainName;
+            _context.Grains.Add(gra);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Create()
+        {
+
+
             return View();
         }
+
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
